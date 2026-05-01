@@ -1,0 +1,7 @@
+{
+  "name": "Karnet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

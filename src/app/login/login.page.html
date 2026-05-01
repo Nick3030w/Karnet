@@ -1,0 +1,59 @@
+<ion-content class="login-content">
+  <div class="login-wrapper">
+
+    <!-- Logo y encabezado -->
+    <div class="login-header">
+      <div class="logo-circle">
+        <span class="logo-initials">KL</span>
+      </div>
+      <h1 class="university-name">Konrad Lorenz</h1>
+      <p class="university-subtitle">Portal Estudiantil</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="login-form">
+
+      <label class="field-label">Correo institucional</label>
+      <ion-item class="form-item" lines="none">
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="usuario@konradlorenz.edu.co"
+          autocomplete="email"
+          [disabled]="loading">
+        </ion-input>
+      </ion-item>
+
+      <label class="field-label">Contraseña</label>
+      <ion-item class="form-item" lines="none">
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          [disabled]="loading"
+          (keyup.enter)="onLogin()">
+        </ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        class="login-btn"
+        (click)="onLogin()"
+        [disabled]="loading">
+        @if (loading) {
+          <ion-spinner name="crescent" slot="start" color="primary"></ion-spinner>
+        }
+        {{ loading ? 'Ingresando...' : 'Iniciar sesión' }}
+      </ion-button>
+
+    </div>
+
+    <!-- Credenciales de prueba -->
+    <div class="demo-hint">
+      <p><strong>Demo:</strong> nicolas.espitia&#64;konradlorenz.edu.co / 123456</p>
+      <p><strong>Admin:</strong> admin&#64;konradlorenz.edu.co / admin123</p>
+    </div>
+
+  </div>
+</ion-content>

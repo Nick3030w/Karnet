@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carnet Digital</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="carnet-content">
+  <div class="carnet-wrapper">
+
+    <!-- Tarjeta del carnet -->
+    <div class="carnet-card">
+
+      <!-- Encabezado -->
+      <div class="carnet-header">
+        <div class="kl-logo">
+          <span>KL</span>
+        </div>
+        <div class="kl-info">
+          <span class="kl-name">Konrad Lorenz</span>
+          <span class="kl-full">Fundación Universitaria</span>
+        </div>
+        <span class="carnet-year">{{ vigencia }}</span>
+      </div>
+
+      <div class="carnet-divider"></div>
+
+      <!-- Foto y datos -->
+      <div class="carnet-body">
+        <div class="student-photo">
+          <!-- Placeholder foto; reemplazar con <img> cuando haya foto real -->
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="photo-svg">
+            <circle cx="40" cy="30" r="18" fill="#c5d5f5"/>
+            <ellipse cx="40" cy="72" rx="28" ry="20" fill="#c5d5f5"/>
+          </svg>
+        </div>
+
+        <div class="student-info">
+          <p class="student-label">Nombre</p>
+          <p class="student-value name">{{ user?.nombre }} {{ user?.apellido }}</p>
+
+          <p class="student-label">Código</p>
+          <p class="student-value code">{{ user?.codigo }}</p>
+
+          <p class="student-label">Programa</p>
+          <p class="student-value">{{ user?.carrera }}</p>
+
+          <p class="student-label">Tipo</p>
+          <p class="student-value">
+            {{ user?.role === 'admin' ? 'Administrativo' : 'Estudiante' }}
+          </p>
+        </div>
+      </div>
+
+      <div class="carnet-divider"></div>
+
+      <!-- QR real -->
+      <div class="carnet-qr">
+        <canvas #qrCanvas class="qr-canvas"></canvas>
+        <p class="qr-label">Escanea para verificar</p>
+        <span class="estado-badge">● Estudiante activo</span>
+      </div>
+
+      <!-- Pie -->
+      <div class="carnet-footer">
+        <span>Vigencia {{ vigencia }}</span>
+        <span class="dot">•</span>
+        <span>konradlorenz.edu.co</span>
+      </div>
+
+    </div>
+
+    <p class="carnet-note">
+      Presenta este carnet para identificarte en las instalaciones de la universidad.
+    </p>
+
+  </div>
+</ion-content>

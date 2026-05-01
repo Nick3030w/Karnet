@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Inicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmLogout()" title="Cerrar sesión">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content">
+  <div class="home-wrapper">
+
+    <!-- Saludo -->
+    <div class="greeting-section">
+      <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+      <h2 class="greeting-text">
+        Hola, <strong>{{ user?.nombre }}</strong>
+      </h2>
+      <p class="greeting-sub">{{ user?.carrera }}</p>
+      <span class="role-badge" [class.admin]="user?.role === 'admin'">
+        {{ user?.role === 'admin' ? 'Administrador' : 'Estudiante' }}
+      </span>
+    </div>
+
+    <!-- Acceso rápido -->
+    <div class="cards-section">
+      <h3 class="section-title">Acceso rápido</h3>
+
+      <div class="action-card carnet-card" (click)="goToCarnet()">
+        <div class="card-icon-wrap">
+          <ion-icon name="card-outline"></ion-icon>
+        </div>
+        <div class="card-info">
+          <span class="card-title">Mi Carnet Digital</span>
+          <span class="card-desc">Ver tu identificación universitaria</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="card-arrow"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Estado de préstamos -->
+    <div class="cards-section">
+      <h3 class="section-title">Estado de préstamos</h3>
+
+      <!-- Tarjeta de estado principal -->
+      <div class="estado-card" [ngClass]="estadoClase">
+
+        <!-- Ícono animado + título -->
+        <div class="estado-top">
+          <div class="estado-icon-wrap">
+            <ion-icon [name]="estadoIcono" class="estado-icon"></ion-icon>
+          </div>
+          <div class="estado-texts">
+            <span class="estado-titulo">{{ estadoTitulo }}</span>
+            <span class="estado-subtitulo">{{ estadoSubtitulo }}</span>
+          </div>
+        </div>
+
+        <!-- Razón (solo si no está activo) -->
+        @if (user?.estadoBiblioteca?.razon) {
+          <div class="estado-razon">
+            <ion-icon name="information-circle-outline" class="razon-icon"></ion-icon>
+            <span>{{ user?.estadoBiblioteca?.razon }}</span>
+          </div>
+        }
+
+        <!-- Fecha límite suspensión -->
+        @if (user?.estadoBiblioteca?.hastaFecha) {
+          <div class="estado-fecha">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>Habilitado nuevamente el <strong>{{ user?.estadoBiblioteca?.hastaFecha }}</strong></span>
+          </div>
+        }
+
+        <!-- Barra de préstamos activos (solo si está activo) -->
+        @if (user?.estadoBiblioteca?.estado === 'activo') {
+          <div class="prestamos-bar-section">
+            <div class="prestamos-bar-header">
+              <span>Préstamos activos</span>
+              <span class="prestamos-count">
+                {{ user?.estadoBiblioteca?.itemsPrestados }} / {{ user?.estadoBiblioteca?.limitePrestamos }}
+              </span>
+            </div>
+            <div class="prestamos-bar-bg">
+              <div
+                class="prestamos-bar-fill"
+                [style.width.%]="barWidth">
+              </div>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <!-- Chips de servicios disponibles -->
+      <div class="servicios-section">
+        <p class="servicios-label">Servicios</p>
+        <div class="servicios-chips">
+
+          <div class="servicio-chip" [class.disponible]="estaActivo" [class.bloqueado]="!estaActivo">
+            <ion-icon [name]="estaActivo ? 'book-outline' : 'lock-closed-outline'"></ion-icon>
+            <span>Biblioteca</span>
+          </div>
+
+          <div class="servicio-chip" [class.disponible]="estaActivo" [class.bloqueado]="!estaActivo">
+            <ion-icon [name]="estaActivo ? 'game-controller-outline' : 'lock-closed-outline'"></ion-icon>
+            <span>Material lúdico</span>
+          </div>
+
+          <div class="servicio-chip disponible">
+            <ion-icon name="laptop-outline"></ion-icon>
+            <span>Salas de cómputo</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>
