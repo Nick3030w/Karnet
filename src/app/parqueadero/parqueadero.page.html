@@ -1,0 +1,259 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Parqueadero</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirModal()" title="Agregar vehículo">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="parq-content">
+  <div class="parq-wrapper">
+
+    <!-- ── Sesiones activas ─────────────────────────── -->
+    @if (sesionesActivas.length > 0) {
+      <div class="section">
+        <h3 class="section-title">
+          <ion-icon name="time-outline"></ion-icon>
+          En el parqueadero ahora
+        </h3>
+
+        @for (sesion of sesionesActivas; track sesion.id) {
+          @let vehiculo = getVehiculo(sesion.vehiculoId);
+          @let resumen  = getResumen(sesion.vehiculoId);
+
+          @if (vehiculo && resumen) {
+            <div class="sesion-card" [class.tarifa-plena]="resumen.esTarifaPlena">
+
+              <!-- Cabecera de la sesión -->
+              <div class="sesion-header">
+                <div class="vehiculo-icon-wrap" [attr.data-tipo]="vehiculo.tipo">
+                  <ion-icon [name]="iconoVehiculo(vehiculo.tipo)"></ion-icon>
+                </div>
+                <div class="sesion-info">
+                  <span class="sesion-placa">{{ vehiculo.placa }}</span>
+                  <span class="sesion-desc">{{ vehiculo.descripcion }}</span>
+                </div>
+                <div class="sesion-badge" [class.plena]="resumen.esTarifaPlena">
+                  {{ resumen.esTarifaPlena ? 'Tarifa plena' : 'Por hora' }}
+                </div>
+              </div>
+
+              <!-- Métricas en tiempo real -->
+              <div class="sesion-metricas">
+                <div class="metrica">
+                  <ion-icon name="time-outline" class="metrica-icon"></ion-icon>
+                  <span class="metrica-valor">{{ formatTiempo(resumen.minutosTranscurridos) }}</span>
+                  <span class="metrica-label">Tiempo</span>
+                </div>
+                <div class="metrica-divider"></div>
+                <div class="metrica">
+                  <ion-icon name="cash-outline" class="metrica-icon"></ion-icon>
+                  <span class="metrica-valor">
+                    {{ resumen.costoActual | currency:'COP':'symbol-narrow':'1.0-0' }}
+                  </span>
+                  <span class="metrica-label">Costo actual</span>
+                </div>
+                <div class="metrica-divider"></div>
+                <div class="metrica">
+                  <ion-icon name="enter-outline" class="metrica-icon"></ion-icon>
+                  <span class="metrica-valor">{{ sesion.horaEntrada | date:'h:mm a' }}</span>
+                  <span class="metrica-label">Entrada</span>
+                </div>
+              </div>
+
+              <!-- Tarifa máxima -->
+              @if (resumen.esTarifaPlena) {
+                <div class="tarifa-plena-aviso">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  Ya pagaste la tarifa máxima del día. ¡Puedes quedarte sin costo adicional!
+                </div>
+              } @else {
+                <div class="tarifa-info">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                  Tarifa plena ({{ resumen.tarifaAplicada.tarifaPlena | currency:'COP':'symbol-narrow':'1.0-0' }})
+                  a partir de {{ resumen.tarifaAplicada.maxHorasTarifa }}h
+                </div>
+              }
+
+              <!-- Botón salida -->
+              <ion-button
+                expand="block"
+                class="btn-salida"
+                (click)="registrarSalida(sesion)">
+                <ion-icon name="exit-outline" slot="start"></ion-icon>
+                Registrar salida
+              </ion-button>
+
+            </div>
+          }
+        }
+      </div>
+    }
+
+    <!-- ── Mis vehículos ────────────────────────────── -->
+    <div class="section">
+      <h3 class="section-title">
+        <ion-icon name="car-outline"></ion-icon>
+        Mis vehículos
+      </h3>
+
+      @if (vehiculos.length === 0) {
+        <div class="empty-state">
+          <ion-icon name="car-outline" class="empty-icon"></ion-icon>
+          <p>No tienes vehículos registrados.</p>
+          <ion-button fill="outline" color="primary" (click)="abrirModal()">
+            Agregar vehículo
+          </ion-button>
+        </div>
+      }
+
+      @for (v of vehiculos; track v.id) {
+        @let sesionActiva = getResumen(v.id);
+        <div class="vehiculo-card" [class.en-parqueadero]="!!sesionActiva">
+
+          <div class="vehiculo-left">
+            <div class="vehiculo-icon-wrap" [attr.data-tipo]="v.tipo">
+              <ion-icon [name]="iconoVehiculo(v.tipo)"></ion-icon>
+            </div>
+            <div class="vehiculo-datos">
+              <span class="vehiculo-placa">{{ v.placa }}</span>
+              <span class="vehiculo-desc">{{ v.descripcion }}</span>
+              <span class="vehiculo-tipo-badge">{{ labelTipo(v.tipo) }}</span>
+            </div>
+          </div>
+
+          <div class="vehiculo-actions">
+            @if (!sesionActiva) {
+              <ion-button
+                fill="clear"
+                color="success"
+                size="small"
+                (click)="registrarEntrada(v)"
+                title="Simular entrada">
+                <ion-icon slot="icon-only" name="enter-outline"></ion-icon>
+              </ion-button>
+            } @else {
+              <div class="en-parq-chip">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                Adentro
+              </div>
+            }
+            <ion-button
+              fill="clear"
+              color="danger"
+              size="small"
+              (click)="confirmarEliminar(v)"
+              title="Eliminar vehículo">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+        </div>
+      }
+    </div>
+
+    <!-- ── Tarifas ──────────────────────────────────── -->
+    <div class="section">
+      <h3 class="section-title">
+        <ion-icon name="cash-outline"></ion-icon>
+        Tarifas vigentes
+      </h3>
+      <div class="tarifas-grid">
+        @for (tipo of tiposVehiculo; track tipo) {
+          <div class="tarifa-card">
+            <div class="tarifa-icon-wrap" [attr.data-tipo]="tipo">
+              <ion-icon [name]="iconoVehiculo(tipo)"></ion-icon>
+            </div>
+            <span class="tarifa-tipo">{{ labelTipo(tipo) }}</span>
+            <span class="tarifa-precio">
+              {{ tarifas[tipo].precioPorHora | currency:'COP':'symbol-narrow':'1.0-0' }}/h
+            </span>
+            <span class="tarifa-plena-label">
+              Máx. {{ tarifas[tipo].tarifaPlena | currency:'COP':'symbol-narrow':'1.0-0' }}/día
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ── Historial ─────────────────────────────────── -->
+    @if (historial.length > 0) {
+      <div class="section">
+        <h3 class="section-title">
+          <ion-icon name="time-outline"></ion-icon>
+          Historial reciente
+        </h3>
+        @for (s of historial; track s.id) {
+          @let veh = getVehiculo(s.vehiculoId);
+          @if (veh) {
+            <div class="historial-item">
+              <div class="vehiculo-icon-wrap sm" [attr.data-tipo]="veh.tipo">
+                <ion-icon [name]="iconoVehiculo(veh.tipo)"></ion-icon>
+              </div>
+              <div class="historial-datos">
+                <span class="historial-placa">{{ veh.placa }} — {{ veh.descripcion }}</span>
+                <span class="historial-fecha">
+                  {{ s.horaEntrada | date:'d MMM, h:mm a':'':'es-CO' }}
+                  → {{ s.horaSalida | date:'h:mm a':'':'es-CO' }}
+                </span>
+              </div>
+              <span class="historial-costo">
+                {{ s.costoFinal | currency:'COP':'symbol-narrow':'1.0-0' }}
+              </span>
+            </div>
+          }
+        }
+      </div>
+    }
+
+  </div>
+</ion-content>
+
+<!-- ── Modal: agregar vehículo ──────────────────────── -->
+<ion-modal [isOpen]="modalAbierto" (didDismiss)="cerrarModal()" [breakpoints]="[0, 0.6]" [initialBreakpoint]="0.6">
+  <ng-template>
+    <div class="modal-wrapper">
+      <div class="modal-handle"></div>
+      <h2 class="modal-title">Agregar vehículo</h2>
+
+      <ion-item class="modal-item" lines="none">
+        <ion-label position="stacked">Tipo de vehículo</ion-label>
+        <ion-select [(ngModel)]="nuevoTipo" interface="popover">
+          <ion-select-option value="carro">🚗 Carro</ion-select-option>
+          <ion-select-option value="moto">🏍️ Moto</ion-select-option>
+          <ion-select-option value="bicicleta">🚲 Bicicleta</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="modal-item" lines="none">
+        <ion-label position="stacked">Placa / Código</ion-label>
+        <ion-input
+          [(ngModel)]="nuevaPlaca"
+          placeholder="Ej: ABC123"
+          [maxlength]="10">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="modal-item" lines="none">
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-input
+          [(ngModel)]="nuevaDescripcion"
+          placeholder="Ej: Chevrolet Spark azul">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" class="modal-btn" (click)="guardarVehiculo()">
+        Guardar vehículo
+      </ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="cerrarModal()">
+        Cancelar
+      </ion-button>
+    </div>
+  </ng-template>
+</ion-modal>

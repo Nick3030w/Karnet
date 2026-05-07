@@ -27,8 +27,8 @@ import {
   gameControllerOutline,
   laptopOutline,
   lockClosedOutline,
-} from 'ionicons/icons';
-import { AuthService } from '../services/auth.service';
+  carOutline,
+} from 'ionicons/icons';import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 
 @Component({
@@ -115,11 +115,16 @@ export class HomePage {
       gameControllerOutline,
       laptopOutline,
       lockClosedOutline,
+      carOutline,
     });
   }
 
   goToCarnet() {
     this.router.navigate(['/carnet']);
+  }
+
+  goToParqueadero() {
+    this.router.navigate(['/parqueadero']);
   }
 
   async confirmLogout() {

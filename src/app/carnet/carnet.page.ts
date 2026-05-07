@@ -66,7 +66,7 @@ export class CarnetPage implements OnInit {
       width: 180,
       margin: 1,
       color: {
-        dark: '#003087',  // azul institucional
+        dark: '#6B2D8B',  // morado institucional Konrad Lorenz
         light: '#ffffff',
       },
       errorCorrectionLevel: 'M',

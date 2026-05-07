@@ -1,5 +1,5 @@
 .login-content {
-  --background: linear-gradient(160deg, #001a4d 0%, #003087 50%, #0057b8 100%);
+  --background: linear-gradient(160deg, #4a1a6b 0%, #6B2D8B 55%, #8B3DAF 100%);
 }
 
 .login-wrapper {
@@ -12,103 +12,93 @@
   box-sizing: border-box;
 }
 
-// ── Header ──────────────────────────────────────────────
+// ── Header con logo KL ───────────────────────────────────
 .login-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
-.logo-circle {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-}
-
-.logo-initials {
-  font-size: 32px;
-  font-weight: 800;
-  color: #003087;
-  letter-spacing: 1px;
+// Logo geométrico SVG de la K
+.kl-logo-svg {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 14px;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
 }
 
 .university-name {
   color: #ffffff;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
+  letter-spacing: 0.5px;
 }
 
 .university-subtitle {
   color: rgba(255, 255, 255, 0.65);
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 // ── Formulario ──────────────────────────────────────────
 .login-form {
   width: 100%;
   max-width: 400px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
   padding: 28px 20px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 }
 
 .field-label {
   display: block;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 6px;
   margin-left: 4px;
-  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-item {
-  --background: rgba(255, 255, 255, 0.1);
+  --background: rgba(255, 255, 255, 0.12);
   --border-radius: 12px;
   --padding-start: 16px;
   --inner-padding-end: 16px;
   --color: #ffffff;
-  --placeholder-color: rgba(255, 255, 255, 0.4);
-  --highlight-color-focused: #5b9fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  --placeholder-color: rgba(255, 255, 255, 0.38);
+  --highlight-color-focused: #E8006F;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 12px;
   margin-bottom: 20px;
 
-  ion-label {
-    color: rgba(255, 255, 255, 0.6) !important;
-  }
-
   ion-input {
     --color: #ffffff;
-    --placeholder-color: rgba(255, 255, 255, 0.4);
+    --placeholder-color: rgba(255, 255, 255, 0.38);
     font-size: 15px;
   }
 }
 
 .login-btn {
-  --background: #ffffff;
-  --background-activated: #dce8ff;
-  --color: #003087;
+  --background: #E8006F;
+  --background-activated: #cc0062;
+  --color: #ffffff;
   --border-radius: 12px;
-  --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --box-shadow: 0 4px 18px rgba(232, 0, 111, 0.45);
   margin-top: 4px;
   height: 50px;
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 // ── Demo hint ───────────────────────────────────────────
 .demo-hint {
-  margin-top: 24px;
+  margin-top: 22px;
   text-align: center;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -120,7 +110,7 @@
   p {
     font-size: 12px;
     margin: 3px 0;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.55);
   }
 
   strong {

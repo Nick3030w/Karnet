@@ -1,12 +1,12 @@
 .carnet-content {
-  --background: #f0f4ff;
+  --background: #F7F4FA;
 }
 
 .carnet-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 20px;
+  padding: 32px 20px 40px;
 }
 
 // ── Tarjeta principal ────────────────────────────────────
@@ -14,36 +14,40 @@
   width: 100%;
   max-width: 360px;
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 48, 135, 0.18);
-  border: 1px solid rgba(0, 48, 135, 0.08);
+  box-shadow: 0 10px 36px rgba(107, 45, 139, 0.2);
+  border: 1px solid rgba(107, 45, 139, 0.1);
 }
 
 // ── Encabezado ───────────────────────────────────────────
 .carnet-header {
-  background: linear-gradient(135deg, #003087 0%, #0057b8 100%);
+  background: linear-gradient(135deg, #4a1a6b 0%, #6B2D8B 100%);
   padding: 18px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  overflow: hidden;
+
+  // Barra multicolor inferior
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #E8006F 0%, #A8C800 50%, #3A8A8A 100%);
+  }
 }
 
-.kl-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Logo K geométrico en el carnet
+.kl-logo-carnet {
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
-
-  span {
-    font-size: 16px;
-    font-weight: 800;
-    color: #003087;
-  }
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
 }
 
 .kl-info {
@@ -60,23 +64,26 @@
 }
 
 .kl-full {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .carnet-year {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   background: rgba(255, 255, 255, 0.15);
   padding: 4px 10px;
   border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
 // ── Divisor ──────────────────────────────────────────────
 .carnet-divider {
   height: 1px;
-  background: #e8edf5;
+  background: linear-gradient(90deg, transparent, #e0d5f0, transparent);
   margin: 0 16px;
 }
 
@@ -93,11 +100,11 @@
   width: 76px;
   height: 76px;
   border-radius: 12px;
-  background: #e8f0fe;
+  background: linear-gradient(135deg, #f3e8ff, #e8d5f5);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #c5d5f5;
+  border: 2px solid rgba(107, 45, 139, 0.2);
   overflow: hidden;
 }
 
@@ -113,17 +120,17 @@
 
 .student-label {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #999;
+  letter-spacing: 0.6px;
+  color: #A8C800;
   margin: 0 0 2px;
 }
 
 .student-value {
   font-size: 13px;
   font-weight: 500;
-  color: #1a1a2e;
+  color: #3D3D3D;
   margin: 0 0 9px;
   white-space: nowrap;
   overflow: hidden;
@@ -133,12 +140,13 @@
     font-size: 14px;
     font-weight: 700;
     white-space: normal;
+    color: #4a1a6b;
   }
 
   &.code {
     font-size: 17px;
     font-weight: 700;
-    color: #003087;
+    color: #E8006F;
     letter-spacing: 1.5px;
     font-family: 'Courier New', monospace;
   }
@@ -149,54 +157,52 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18px 16px 14px;
+  padding: 16px 16px 14px;
   gap: 8px;
 }
 
 .qr-canvas {
   border-radius: 10px;
-  border: 3px solid #e8edf5;
+  border: 3px solid rgba(107, 45, 139, 0.15);
   display: block;
 }
 
 .qr-label {
   font-size: 11px;
-  color: #aaa;
+  color: #bbb;
   margin: 0;
   letter-spacing: 0.3px;
 }
 
 .estado-badge {
   font-size: 12px;
-  font-weight: 600;
-  color: #1a7f4b;
-  background: #e6f7ef;
-  border: 1px solid #a8e0c0;
+  font-weight: 700;
+  color: #2E7D5E;
+  background: linear-gradient(135deg, #edfaf3, #f5fdf8);
+  border: 1px solid #a8dfc4;
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 5px 14px;
 }
 
 // ── Pie ──────────────────────────────────────────────────
 .carnet-footer {
-  background: #f4f6fb;
+  background: linear-gradient(90deg, #4a1a6b, #6B2D8B);
   padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #999;
+  color: rgba(255,255,255,0.7);
 }
 
-.dot {
-  color: #ccc;
-}
+.dot { color: rgba(255,255,255,0.35); }
 
 // ── Nota inferior ────────────────────────────────────────
 .carnet-note {
   margin-top: 20px;
   font-size: 13px;
-  color: #888;
+  color: #999;
   text-align: center;
   max-width: 300px;
   line-height: 1.5;

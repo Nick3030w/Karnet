@@ -22,6 +22,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'parqueadero',
+    loadComponent: () => import('./parqueadero/parqueadero.page').then((m) => m.ParqueaderoPage),
+    canActivate: [authGuard],
+  },
+  {
     path: '**',
     redirectTo: 'login',
   },

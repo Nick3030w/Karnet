@@ -1,2 +1,67 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// ============================================================
+//  KONRAD LORENZ — Sistema de diseño institucional
+// ============================================================
+
+// Paleta de marca
+$kl-purple:      #6B2D8B;   // Morado principal (header web)
+$kl-magenta:     #E8006F;   // Magenta/Rosa (acento fuerte, logo)
+$kl-lime:        #A8C800;   // Verde limón (logo)
+$kl-green:       #2E7D5E;   // Verde oscuro (logo)
+$kl-teal:        #3A8A8A;   // Teal (logo)
+$kl-dark:        #3D3D3D;   // Gris oscuro (texto)
+$kl-light-bg:    #F7F4FA;   // Fondo claro con tinte morado
+$kl-white:       #FFFFFF;
+
+// ── Variables CSS globales ───────────────────────────────
+:root {
+  // Ionic primary → morado institucional
+  --ion-color-primary:           #{$kl-purple};
+  --ion-color-primary-rgb:       107, 45, 139;
+  --ion-color-primary-contrast:  #ffffff;
+  --ion-color-primary-shade:     #5a2575;
+  --ion-color-primary-tint:      #7d3fa0;
+
+  // Secondary → magenta
+  --ion-color-secondary:         #{$kl-magenta};
+  --ion-color-secondary-rgb:     232, 0, 111;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-shade:   #cc0062;
+  --ion-color-secondary-tint:    #ea1a7d;
+
+  // Tertiary → verde limón
+  --ion-color-tertiary:          #{$kl-lime};
+  --ion-color-tertiary-rgb:      168, 200, 0;
+  --ion-color-tertiary-contrast: #3D3D3D;
+  --ion-color-tertiary-shade:    #94b000;
+  --ion-color-tertiary-tint:     #b1ce1a;
+
+  // Success → verde oscuro
+  --ion-color-success:           #{$kl-green};
+  --ion-color-success-rgb:       46, 125, 94;
+  --ion-color-success-contrast:  #ffffff;
+  --ion-color-success-shade:     #286e53;
+  --ion-color-success-tint:      #438a6e;
+
+  // Warning → amarillo cálido
+  --ion-color-warning:           #F59E0B;
+  --ion-color-warning-rgb:       245, 158, 11;
+  --ion-color-warning-contrast:  #ffffff;
+  --ion-color-warning-shade:     #d88b0a;
+  --ion-color-warning-tint:      #f6a823;
+
+  // Danger → rojo
+  --ion-color-danger:            #D93025;
+  --ion-color-danger-rgb:        217, 48, 37;
+  --ion-color-danger-contrast:   #ffffff;
+  --ion-color-danger-shade:      #bf2a20;
+  --ion-color-danger-tint:       #dd453b;
+
+  // Fondo general de la app
+  --ion-background-color:        #{$kl-light-bg};
+  --ion-text-color:              #{$kl-dark};
+  --ion-font-family:             'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  // Toolbar
+  --ion-toolbar-background:      #{$kl-purple};
+  --ion-toolbar-color:           #ffffff;
+}
