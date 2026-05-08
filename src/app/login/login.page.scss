@@ -12,26 +12,29 @@
   box-sizing: border-box;
 }
 
-// ── Header con logo KL ───────────────────────────────────
+// ── Header con logo ──────────────────────────────────────
 .login-header {
   text-align: center;
   margin-bottom: 36px;
 }
 
-// Logo geométrico SVG de la K
-.kl-logo-svg {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 14px;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 14px 28px;
+  margin-bottom: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
 }
 
-.university-name {
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 2px;
-  letter-spacing: 0.5px;
+.logo-img {
+  width: 220px;
+  height: auto;
+  display: block;
 }
 
 .university-subtitle {

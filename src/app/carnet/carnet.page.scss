@@ -23,14 +23,13 @@
 // ── Encabezado ───────────────────────────────────────────
 .carnet-header {
   background: linear-gradient(135deg, #4a1a6b 0%, #6B2D8B 100%);
-  padding: 18px 20px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
 
-  // Barra multicolor inferior
   &::after {
     content: '';
     position: absolute;
@@ -42,32 +41,20 @@
   }
 }
 
-// Logo K geométrico en el carnet
+.kl-logo-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
 .kl-logo-carnet {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-}
-
-.kl-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.kl-name {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.kl-full {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  width: 130px;
+  height: auto;
+  display: block;
 }
 
 .carnet-year {
